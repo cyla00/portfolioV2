@@ -40,7 +40,7 @@ export default{
 
         <div id="form-wrapper">
 
-            <h1 id="form-title">let's get in <span class="custom-title">touch</span></h1>
+            <h1 id="form-title">let's <span class="custom-title">talk!</span></h1>
             
             <div class="form-fields">
                 <input type="text" name="first-name" id="" placeholder="first name">
