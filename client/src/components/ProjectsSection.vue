@@ -1,26 +1,28 @@
 <script lang="ts">
-export default{
+import { defineComponent } from "vue";
+
+export default defineComponent({
     data() {
         return{
             projects: [],
             slideIndex: 0,
         }
     },
-    mounted() {
-        this.fetchProjects();
-    },
     methods: {
         fetchProjects: () => {
-            // call the api with json content
+            // call api obj
         },
-        next: (slideIndex) => {
+        next: (slideIndex :number) => {
             slideIndex += 1
         },
-        back: (slideIndex) => {
+        back: (slideIndex :number) => {
             slideIndex -= 1  
         },
     },
-}
+    mounted() {
+        this.fetchProjects();
+    },
+})
 </script>
 
 <template>
