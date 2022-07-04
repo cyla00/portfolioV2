@@ -5,10 +5,9 @@ const express = require('express')
 const os = require('os')
 const app = express()
 const { Client } = require('pg')
-const client = new Client()
 const { v4: uuidv4 } = require('uuid')
 const { createHash } = require('crypto')
-
+const client = new Client()
 // sha256 hash generator
 function hash(string :string) {
     return createHash('sha256').update(string).digest('hex')
@@ -37,7 +36,7 @@ async function db_build() :Promise<void>{
         await client.query(admin_query, values, async (err :any, res :object) :Promise<void> => {
             if(err){
                 console.log(err.stack)
-                await client.end()
+                client.end()
                 return
             }
         })
@@ -52,20 +51,19 @@ async function db_build() :Promise<void>{
         );`, async (err :any, res :object) :Promise<void> => {
             if(err){
                 console.log(err.stack)
-                await client.end()
+                client.end()
                 return
             }
             console.log('database connected and populated')
-            await client.end()
+            client.end()
         })
     }
     catch(err){
         console.log(err)
-        await client.end()
+        client.end()
     }
 }
 db_build()
-
 
 // api starting point
 app.use(express.json())
@@ -74,20 +72,20 @@ app.post('/api/login', async (req:any, res:any) :Promise<void> => {
     const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
     const [admin_email, admin_password] :string[] = Buffer.from(b64auth, 'base64').toString().split(':')
     
-    const query :string = `SELECT * FROM admin WHERE email=$1 AND password=$2;`
-    const values :string[] = [hash(admin_email), hash(admin_password)]
+    const query :string = `select exists(select * from contact where email=$1 AND password=$2);`
     
+    const values :string[] = [hash(admin_email), hash(admin_password)]
+
     try{
-        await client.query(query, values, async (err :any, res :any) :Promise<void> => {
-            console.log(res)
-            await client.end()
+        await client.query(query, values, async (err :any, data :any) :Promise<void> => {
+            console.log(data)
+            res.sendStatus(200)
         })
     }
     catch(err){
         console.log(err)
-        await client.end()
+        res.sendStatus(500)
     }
-    res.sendStatus(200)
 })
 
 app.post('/api/projects', (req:any, res:any) :void => {
