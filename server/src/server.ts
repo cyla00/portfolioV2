@@ -4,10 +4,10 @@ require('dotenv').config()
 const express = require('express')
 const os = require('os')
 const app = express()
-const { Client } = require('pg')
 const { v4: uuidv4 } = require('uuid')
 const { createHash } = require('crypto')
-const client = new Client()
+const { Pool } = require('pg')
+const pool = new Pool()
 // sha256 hash generator
 function hash(string :string) {
     return createHash('sha256').update(string).digest('hex')
@@ -16,32 +16,23 @@ function hash(string :string) {
 // database connector and builder
 async function db_build() :Promise<void>{
     try{
-        await client.connect()
-        await client.query(`CREATE TABLE IF NOT EXISTS admin (
+        await pool.query(`CREATE TABLE IF NOT EXISTS admin (
             id VARCHAR(200) UNIQUE NOT NULL PRIMARY KEY,
             email VARCHAR(100) UNIQUE NOT NULL ,
             password VARCHAR(200) UNIQUE NOT NULL,
             created_on TIMESTAMP NOT NULL,
             last_login TIMESTAMP
         );`, async (err :any, res :object) :Promise<void> => {
-            if(err){
-                console.log(err.stack)
-                await client.end()
-                return
-            }
+            if(err) return console.log(err.stack)
         })
 
         const admin_query = `INSERT INTO admin(id, email, password, created_on) VALUES ($1, $2, $3, current_timestamp) ON CONFLICT (email) DO NOTHING;`
         const values = [uuidv4(), hash(String(process.env.DEV_EMAIL)), hash(String(process.env.DEV_PW))]
-        await client.query(admin_query, values, async (err :any, res :object) :Promise<void> => {
-            if(err){
-                console.log(err.stack)
-                client.end()
-                return
-            }
+        await pool.query(admin_query, values, async (err :any, res :object) :Promise<void> => {
+            if(err) return console.log(err.stack)
         })
 
-        await client.query(`CREATE TABLE IF NOT EXISTS projects (
+        await pool.query(`CREATE TABLE IF NOT EXISTS projects (
             id VARCHAR(200) UNIQUE NOT NULL PRIMARY KEY,
             title VARCHAR(100) NOT NULL,
             image VARCHAR(20000) NOT NULL,
@@ -49,18 +40,13 @@ async function db_build() :Promise<void>{
             tech_stack VARCHAR[],
             created_on TIMESTAMP NOT NULL
         );`, async (err :any, res :object) :Promise<void> => {
-            if(err){
-                console.log(err.stack)
-                client.end()
-                return
-            }
+            if(err) return console.log(err.stack)
             console.log('database connected and populated')
-            client.end()
         })
     }
     catch(err){
         console.log(err)
-        client.end()
+        pool.end()
     }
 }
 db_build()
@@ -72,14 +58,25 @@ app.post('/api/login', async (req:any, res:any) :Promise<void> => {
     const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
     const [admin_email, admin_password] :string[] = Buffer.from(b64auth, 'base64').toString().split(':')
     
-    const query :string = `select exists(select * from contact where email=$1 AND password=$2);`
+    const query :string = `SELECT id, last_login FROM admin WHERE email=$1 AND password=$2;`
+    
     
     const values :string[] = [hash(admin_email), hash(admin_password)]
 
     try{
-        await client.query(query, values, async (err :any, data :any) :Promise<void> => {
-            console.log(data)
-            res.sendStatus(200)
+        await pool.query(query, values, async (err :any, data :any) :Promise<any> => {
+            if(err) return res.sendStatus(500)
+            if(data.rows[0]){   
+                res.sendStatus(200)
+                const login_time_query :string = `UPDATE admin SET last_login=$1 WHERE id=$2`
+                const values :string[] = ['now()', data.rows[0].id]
+                await pool.query(login_time_query, values)
+                var now :string = new Date().toLocaleString()
+                console.log(`admin logged in: ${now}`)
+            }
+            else{
+                res.sendStatus(403)
+            }
         })
     }
     catch(err){
