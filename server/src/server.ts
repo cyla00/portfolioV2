@@ -44,7 +44,7 @@ async function db_build() :Promise<void>{
 
         await client.query(`CREATE TABLE IF NOT EXISTS projects (
             id VARCHAR(200) UNIQUE NOT NULL PRIMARY KEY,
-            title VARCHAR(100) NOT NULL ,
+            title VARCHAR(100) NOT NULL,
             image VARCHAR(20000) NOT NULL,
             project_url VARCHAR(200),
             tech_stack VARCHAR[],
@@ -61,18 +61,32 @@ async function db_build() :Promise<void>{
     }
     catch(err){
         console.log(err)
+        await client.end()
     }
 }
 db_build()
 
 
 // api starting point
-app.use(express.json()) 
+app.use(express.json())
 
-app.post('/api/login', (req:any, res:any) :void => {
-    const email :string = req.body.email
-    const password :string = req.body.password
-    // process login data against database
+app.post('/api/login', async (req:any, res:any) :Promise<void> => {
+    const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
+    const [admin_email, admin_password] :string[] = Buffer.from(b64auth, 'base64').toString().split(':')
+    
+    const query :string = `SELECT * FROM admin WHERE email=$1 AND password=$2;`
+    const values :string[] = [hash(admin_email), hash(admin_password)]
+    
+    try{
+        await client.query(query, values, async (err :any, res :any) :Promise<void> => {
+            console.log(res)
+            await client.end()
+        })
+    }
+    catch(err){
+        console.log(err)
+        await client.end()
+    }
     res.sendStatus(200)
 })
 
