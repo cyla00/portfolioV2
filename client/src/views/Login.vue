@@ -1,0 +1,52 @@
+<script lang="ts">
+import axios from 'axios'
+
+export default{
+    data(){
+        return{
+            email: '',
+            password: '',
+        }
+    },
+    methods: {
+        async checkLoginData(email :string, password :string){
+            if(email === '' || password == '') return window.location.reload()
+            await axios.post('http://WIN-88K85H9IC3G:3000/api/login', {}, {
+                auth: {
+                    username: email,
+                    password: password,
+                }
+            })
+            .then(async (res :any) => {
+                if(res.status !== 200) return window.location.reload()
+                await axios.post('http://WIN-88K85H9IC3G:3000/api/idcheck', {id: res.data.id}).then((inner_res :any) => {
+                    if(inner_res.status !== 200) return window.location.reload()
+                    localStorage.setItem('id', res.data.id)
+                    return window.location.href = '/admin'
+                })
+                .catch((err :any)=> {
+                    if(err) window.location.reload()
+                })
+            })
+            .catch((err :any)=> {
+                if(err) window.location.reload()
+            })
+        }
+    },
+}
+</script>
+
+
+<template>
+
+    <div>
+        <h1>login</h1>
+        <input v-model="email" placeholder="email" type="text">
+        <input v-model="password" placeholder="password" type="password">
+        <button @click="checkLoginData(email, password)">login</button>
+    </div>
+</template>
+
+<style>
+
+</style>
