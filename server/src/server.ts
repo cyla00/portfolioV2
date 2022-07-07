@@ -72,6 +72,8 @@ app.post('/api/login', async (req:any, res:any) :Promise<void> => {
                 const login_time_query :string = `UPDATE admin SET last_login=$1 WHERE id=$2`
                 const values :string[] = ['now()', data.rows[0].id]
                 await pool.query(login_time_query, values)
+                var now :string = new Date().toLocaleString()
+                console.log(`admin logged in: ${now}`)
                 res.status(200).send({id: data.rows[0].id})
             }
             else{
@@ -93,8 +95,6 @@ app.post('/api/idcheck', async (req :any, res :any) :Promise<void> => {
         await pool.query(query, value, async (err :any, data :any) :Promise<any> => {         
             if(err) return res.sendStatus(500)
             if(!data.rows[0]) return res.sendStatus(403)
-            var now :string = new Date().toLocaleString()
-            console.log(`admin logged in: ${now}`)
             return res.sendStatus(200)
         })
     }
