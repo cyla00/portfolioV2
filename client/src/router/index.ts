@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Main from '../views/Main.vue'
 import Admin from '../views/Admin.vue'
 import Login from '../views/Login.vue'
+import { nextTick } from 'vue'
 const axios = require('axios').default
 
 const routes: Array<RouteRecordRaw> = [
@@ -14,10 +15,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin',
     name: 'Admin',
     component: Admin,
-    beforeEnter: (to, from) => {
-      if(localStorage.length == 0) return { name: 'Login' }
-      
-      console.log(localStorage.length)
+    beforeEnter: async (to, from) => {
+      if(localStorage.length == 0 || localStorage.getItem('id') == "") return { name: 'Login' }
     }
   },
   {

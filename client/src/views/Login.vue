@@ -11,7 +11,7 @@ export default{
     methods: {
         async checkLoginData(email :string, password :string){
             if(email === '' || password == '') return window.location.reload()
-            await axios.post('http://WIN-88K85H9IC3G:3000/api/login', {}, {
+            await axios.post(`http://WIN-7OOIKM6PDBD:3000/api/login`, {}, {
                 auth: {
                     username: email,
                     password: password,
@@ -19,16 +19,16 @@ export default{
             })
             .then(async (res :any) => {
                 if(res.status !== 200) return window.location.reload()
-                await axios.post('http://WIN-88K85H9IC3G:3000/api/idcheck', {id: res.data.id}).then((inner_res :any) => {
+                await axios.post(`http://WIN-7OOIKM6PDBD:3000/api/idcheck`, {id: res.data.id}).then((inner_res :any) => {
                     if(inner_res.status !== 200) return window.location.reload()
                     localStorage.setItem('id', res.data.id)
                     return window.location.href = '/admin'
                 })
-                .catch((err :any)=> {
+                .catch((err :any) => {
                     if(err) window.location.reload()
                 })
             })
-            .catch((err :any)=> {
+            .catch((err :any) => {
                 if(err) window.location.reload()
             })
         }
