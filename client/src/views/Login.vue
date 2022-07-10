@@ -20,16 +20,16 @@ export default{
             .then(async (res :any) => {
                 if(res.status !== 200) return window.location.reload()
                 await axios.post(`http://WIN-7OOIKM6PDBD:3000/api/idcheck`, {id: res.data.id}).then((inner_res :any) => {
-                    if(inner_res.status !== 200) return window.location.reload()
+                    if(inner_res.status !== 200) return window.location.href = '/login'
                     localStorage.setItem('id', res.data.id)
                     return window.location.href = '/admin'
                 })
                 .catch((err :any) => {
-                    if(err) window.location.reload()
+                    window.location.reload()
                 })
             })
             .catch((err :any) => {
-                if(err) window.location.reload()
+                window.location.reload()
             })
         }
     },

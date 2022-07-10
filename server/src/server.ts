@@ -94,24 +94,46 @@ app.post('/api/idcheck', async (req :any, res :any) :Promise<void> => {
     try{
         await pool.query(query, value, async (err :any, data :any) :Promise<any> => {         
             if(err) return res.sendStatus(500)
-            if(!data.rows[0]) return res.sendStatus(403)
+            if(!data.rows[0].exists) return res.sendStatus(403)
             return res.sendStatus(200)
         })
     }
     catch(err){
         console.log(err)
         res.sendStatus(500)
-    }
+        pool.end()
+    } 
 })
 
 app.post('/api/projects', (req:any, res:any) :void => {
 
-    res.sendStatus(200)
+    res.status(200).body()
 })
 
-app.post('/api/addProject', (req:any, res:any) :void => {
-    
-    res.sendStatus(200)
+app.post('/api/addProject', async (req:any, res:any) :Promise<void> => {
+    const query :string = `select exists(select 1 from admin where id=$1)`
+    const value :string[] = [req.body.idcheck]
+
+    await pool.query(query, value, async (err :any, data :any) :Promise<any> => {         
+        if(err) return res.sendStatus(500)
+        if(!data.rows[0].exists) return res.sendStatus(403)
+        console.log(data)
+        
+        const pushQuery :string = `INSERT INTO projects(
+            id, 
+            title, 
+            image, 
+            project_url, 
+            tech_stack, 
+            created_on
+            ) VALUES ($1, $2, $3, $4, $5, now())`
+        
+        const pushValues :any[] = [uuidv4(), req.body.title, req.body.image, req.body.url, req.body.tech]
+        await pool.query(pushQuery, pushValues, async (err :any, data :any) :Promise<any> => {
+            if(err) return res.sendStatus(500)
+            return res.sendStatus(200)
+        })
+    })
 })
 
 app.post('/api/removeProject', (req:any, res:any) :void => {

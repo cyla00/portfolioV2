@@ -8,6 +8,7 @@ export default defineComponent({
             tech: [] as string[],
             techUrl: '',
             title: '',
+            image: '',
             url: '',
         }
     },
@@ -17,6 +18,7 @@ export default defineComponent({
             return window.location.href = '/'
         },
         addIndex(){
+            if(this.techUrl == '') return alert('please assign a value to tech url')
             this.tech.push(this.techUrl)
             console.log(this.tech)
         },
@@ -25,14 +27,22 @@ export default defineComponent({
             console.log(this.tech)
         },
         async addProject(){
+
+            if(this.title == '' || this.image == '') return alert('please fill the title and image field')
+            if(this.url == '') this.url = 'url not available'
+
             await axios.post(`http://WIN-7OOIKM6PDBD:3000/api/addProject`, 
-            {title: this.title, url: this.url, techUrl: this.techUrl, tech: this.tech, idcheck: localStorage.getItem('id')})
+            {title: this.title, image: this.image, url: this.url, tech: this.tech, idcheck: localStorage.getItem('id')})
             .then((res :any) => {
                 if(res.status !== 200) {
                     localStorage.removeItem('id')
-                    return window.location.reload()
+                    window.location.reload()
                 }
                 return window.location.reload()
+            })
+            .catch((err :any) => {
+                localStorage.removeItem('id')
+                return window.location.href = '/login'
             })
         }
     },
@@ -46,7 +56,7 @@ export default defineComponent({
         <button @click="logout()">logout</button>
         <div id="add_form" ref="add_form">
             <input v-model="title" placeholder="title" type="text">
-            <input name="background" type="text" placeholder="background link">
+            <input v-model="image" type="text" placeholder="background link">
             <input v-model="url" placeholder="url" type="text">
             <div v-bind:key="i" v-for="i in tech">
                 <p>{{i}}</p>
