@@ -34,27 +34,27 @@ export default{
         </div>
         <div id="title">
             <h1>Hello! my name is Ismail<br><span class="custom-title">full-stack web developer</span></h1>
-            <p>Here some of the technologies i use.</p>
+            <p>Here some of the technologies i use</p>
             <img src="@/assets/primary.png" alt="">
         </div>
 
         <div id="form-wrapper">
 
-            <h1 id="form-title">let's get in <span class="custom-title">touch</span></h1>
+            <h1 id="form-title">let's <span class="custom-title">work</span> together<br>or get in touch</h1>
             
             <div class="form-fields">
-                <input type="text" name="first-name" id="" placeholder="first name">
-                <input type="text" name="last-name" id="" placeholder="last name">
+                <input type="text" name="first-name" id="" placeholder="First Name/Prenom">
+                <input type="text" name="last-name" id="" placeholder="Last Name/Nom">
             </div>
 
 
             <div class="form-fields">
-                <input type="text" name="email" id="" placeholder="email">
-                <input type="text" name="number" id="" placeholder="number">
+                <input type="text" name="email" id="" placeholder="E-Mail">
+                <input type="text" name="number" id="" placeholder="Number/Numero">
             </div>
 
             <div class="form-fields">
-                <input type="text" name="message" id="msg" placeholder="message">
+                <input type="text" name="message" id="msg" placeholder="Project Idea/Message">
             </div>
 
             <div id="contact-btn">
@@ -63,7 +63,7 @@ export default{
             
 
             <div id="email-me">
-                <p>email me!<br>{{email}}</p>
+                <p>E-Mail me!<br>{{email}}</p>
             </div>
         </div>
     </div>

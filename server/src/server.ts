@@ -54,7 +54,9 @@ db_build()
 
 // api starting point
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+app.set('json spaces', 2)
 
 app.post('/api/login', async (req:any, res:any) :Promise<void> => {
     const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
@@ -105,9 +107,18 @@ app.post('/api/idcheck', async (req :any, res :any) :Promise<void> => {
     } 
 })
 
-app.post('/api/projects', (req:any, res:any) :void => {
+app.get('/api/projects', async (req:any, res:any) :Promise<void> => {
 
-    res.status(200).body()
+    const query :string = `SELECT * FROM projects`
+    let projectList :any[] = []
+    await pool.query(query, async (err :any, data :any) :Promise<any> => {
+        if(err) res.sendStatus(500)
+
+        data.rows.forEach((element :any) => {
+            projectList.push(element)
+        })
+        res.status(200).json(projectList)
+    })
 })
 
 app.post('/api/addProject', async (req:any, res:any) :Promise<void> => {
@@ -117,7 +128,6 @@ app.post('/api/addProject', async (req:any, res:any) :Promise<void> => {
     await pool.query(query, value, async (err :any, data :any) :Promise<any> => {         
         if(err) return res.sendStatus(500)
         if(!data.rows[0].exists) return res.sendStatus(403)
-        console.log(data)
         
         const pushQuery :string = `INSERT INTO projects(
             id, 
