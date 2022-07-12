@@ -29,7 +29,7 @@ export default defineComponent({
             if(this.title == '' || this.image == '') return alert('please fill the title and image field')
             if(this.url == '') this.url = 'url not available'
 
-            await axios.post(`http://WIN-7OOIKM6PDBD:3000/api/addProject`, 
+            await axios.post(`http://localhost:3000/api/addProject`, 
             {title: this.title, image: this.image, url: this.url, tech: this.tech, idcheck: localStorage.getItem('id')})
             .then((res :any) => {
                 if(res.status !== 200) {

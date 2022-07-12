@@ -27,11 +27,13 @@ export default{
 </script>
 
 <template>
+    
     <div id="about-wrapper">
         <div id="navigation"> 
             <button id="btn1" class="about-button" @click="btn1()"></button>
             <button id="btn2" class="about-button" @click="btn2()"></button>
         </div>
+
         <div id="title">
             <h1>Hello! my name is Ismail<br><span class="custom-title">full-stack web developer</span></h1>
             <p>Here some of the technologies i use</p>
@@ -54,7 +56,7 @@ export default{
             </div>
 
             <div class="form-fields">
-                <input type="text" name="message" id="msg" placeholder="Project Idea/Message">
+                <input type="text" name="message" id="msg" placeholder="Message">
             </div>
 
             <div id="contact-btn">
@@ -67,6 +69,7 @@ export default{
             </div>
         </div>
     </div>
+    
 </template>
 
 <style scoped>

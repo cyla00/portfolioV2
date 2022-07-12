@@ -6,21 +6,22 @@ export default defineComponent({
     data() {
         return{
             projects: [],
-            slideIndex: 0,
+            display: 'flex',
+            index: 0,
         }
     },
     methods: {
         async fetchProjects(){
-            await axios.get('http://WIN-7OOIKM6PDBD:3000/api/projects').then((data) => {
+            await axios.get('http://localhost:3000/api/projects').then((data) => {
                 this.projects = data.data
             })
         },
-        next(slideIndex :number){
-            this.slideIndex += 1
+        next(){
+            this.index ++
         },
-        back(slideIndex :number){
-            this.slideIndex -= 1  
-        },
+        back(){
+            this.index --
+        }
     },
     mounted() {
         this.fetchProjects()
@@ -31,17 +32,19 @@ export default defineComponent({
 <template>
     <div id="projects-wrapper">
         <h1>Some Of My Projects</h1>
-        <div id="slider">
 
-            <div class="item" v-bind:key="i" v-for="i in projects">
+
+
+        <div id="slider">
+            <div class="item" :key="i" v-for="i in projects" :style="{display: display}">
                 <h1>{{i.title}}</h1>
                 <img class="project-image" v-bind:src=i.image alt="">
-                <a class="project-link" href="{{i.project_url}}">{{i.project_url}}</a>
-                <div class="techstack-wrapper" v-bind:key="stack" v-for="stack in i.tech_stack">
+                <a v-if="i.project_url == 'url not available'" href="/">{{i.project_url}}</a>
+                <a v-if="i.project_url !== 'url not available'" class="project-link" target="_blank" v-bind:href="`https://${i.project_url}`">View Live</a>
+                <div class="techstack-wrapper" :key="stack" v-for="stack in i.tech_stack">
                     <img class="stack-image" v-bind:src=stack alt="">
                 </div>
-            </div>
-            
+            </div>  
         </div>
 
         <button id="next" @click="next()">next</button>
@@ -54,6 +57,8 @@ export default defineComponent({
 #projects-wrapper{
     background: #eeeeee;
     margin: auto;
+    overflow: hidden;
+    height: 100vh;
 }
 
 #projects-wrapper h1{
