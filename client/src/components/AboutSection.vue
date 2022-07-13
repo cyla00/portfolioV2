@@ -37,7 +37,42 @@ export default{
         <div id="title">
             <h1>Hello! my name is Ismail<br><span class="custom-title">full-stack web developer</span></h1>
             <p>Here some of the technologies i use</p>
-            <img src="@/assets/primary.png" alt="">
+            
+
+            <div id="tech-stack">
+                <div class="img-wrapper">
+                    <img src="https://i.ibb.co/BK1T9FM/dj.png" alt="">
+                </div>
+                
+                <div class="img-wrapper">
+                    <img src="https://i.ibb.co/2h7P91H/js.png" alt="">
+                </div>
+
+                <div class="img-wrapper">
+                    <img src="https://i.ibb.co/5YShrqL/mongo.png" alt="">
+                </div>
+
+                <div class="img-wrapper">
+                    <img src="https://i.ibb.co/M1ZkK0h/ps.png" alt="">
+                </div>
+            
+                <div class="img-wrapper">
+                    <img src="https://i.ibb.co/vcfC91m/py.png" alt="">
+                </div>
+                
+                <div class="img-wrapper">
+                    <img src="https://i.ibb.co/gVbjkHD/svelte.png" alt="">
+                </div>
+            
+                <div class="img-wrapper">
+                    <img src="https://i.ibb.co/d4NGP5N/ts.pngg" alt="">
+                </div>
+            
+                <div class="img-wrapper">
+                    <img src="https://i.ibb.co/dcF9ZHN/vue.png" alt="">
+                </div>
+            </div>
+             <p id="scroll">Scroll down to see some of my projects</p>
         </div>
 
         <div id="form-wrapper">
@@ -45,14 +80,14 @@ export default{
             <h1 id="form-title">let's <span class="custom-title">work</span> together<br>or get in touch</h1>
             
             <div class="form-fields">
-                <input type="text" name="first-name" id="" placeholder="First Name/Prenom">
-                <input type="text" name="last-name" id="" placeholder="Last Name/Nom">
+                <input type="text" name="first-name" id="" placeholder="First Name">
+                <input type="text" name="last-name" id="" placeholder="Last Name">
             </div>
 
 
             <div class="form-fields">
                 <input type="text" name="email" id="" placeholder="E-Mail">
-                <input type="text" name="number" id="" placeholder="Number/Numero">
+                <input type="text" name="number" id="" placeholder="Number">
             </div>
 
             <div class="form-fields">
@@ -60,7 +95,7 @@ export default{
             </div>
 
             <div id="contact-btn">
-                <button>submit</button>
+                <button>Submit</button>
             </div>
             
 
@@ -68,6 +103,7 @@ export default{
                 <p>E-Mail me!<br>{{email}}</p>
             </div>
         </div>
+        
     </div>
     
 </template>
@@ -78,6 +114,7 @@ export default{
     grid-template-columns: 5% 1fr;
     font-family: Archivo;
     background: #212121;
+    min-height: 100vh;
 }
 #navigation{
     margin: auto;
@@ -100,7 +137,7 @@ export default{
     transition: 0.2s;
 }
 #title{
-    font-size: 1em;
+    font-size: 1.5em;
     color: #0D7377;
     margin: auto;
 }
@@ -113,19 +150,37 @@ p{
     font-family: 'Open Sans';
     color: #c3c3c3;
 }
+
+#tech-stack{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.img-wrapper{
+    background-color: rgba(195, 195, 195, 0.5);
+    width: 100px;
+    height: 100px;
+    width: 100px;
+    height: 100px;
+    margin: 1em;
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 5px;
+    text-align: center;
+}
 img{
-    width: 30vw;
-    height: auto;
-    margin: auto;
+    height: 100px;
+    width: 100px;
 }
 
 #form-wrapper{
     display: none;
     margin: auto;
     width: 70%;
+    font-size: 1.5em;
 }
 #form-wrapper h1{
-    margin-bottom: 3em;
+    margin-bottom: 2em;
 }
 
 #form-title{
@@ -144,7 +199,8 @@ input{
 
 .form-fields{
     display: flex;
-    width: 100%;
+    width: 80%;
+    margin: auto;
 }
 
 #msg{
@@ -153,8 +209,8 @@ input{
 }
 
 #contact-btn{
-    text-align: left;
-    margin: 2%;
+    text-align: center;
+    margin: auto;
 }
 #contact-btn button{
     background: #eeeeee;
@@ -167,13 +223,19 @@ input{
 
 #email-me{
     text-align: left;
-    font-size: 0.9em;
-    margin: 2%;
-    margin-top: 4em;
+    font-size: 0.6em;
+    margin: auto;
+    margin-top: 10em;
     color: #ffffff;
 }
 
 #email-me p{
     color: #ffffff;
+}
+
+#scroll{
+    text-align: center;
+    width: 100%;
+    margin-top: 6em;
 }
 </style>

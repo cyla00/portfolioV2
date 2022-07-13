@@ -20,10 +20,4 @@ export default {
 </template>
 
 <style>
-
-#main-page{
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
 </style>
