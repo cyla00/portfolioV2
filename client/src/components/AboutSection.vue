@@ -72,7 +72,6 @@ export default{
                     <img src="https://i.ibb.co/dcF9ZHN/vue.png" alt="">
                 </div>
             </div>
-             <p id="scroll">Scroll down to see some of my projects</p>
         </div>
 
         <div id="form-wrapper">
@@ -231,11 +230,5 @@ input{
 
 #email-me p{
     color: #ffffff;
-}
-
-#scroll{
-    text-align: center;
-    width: 100%;
-    margin-top: 6em;
 }
 </style>

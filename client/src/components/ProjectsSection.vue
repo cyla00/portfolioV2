@@ -23,23 +23,26 @@ export default defineComponent({
 
 <template>
     <div id="projects-wrapper">
-            <div class="item" :key="i" v-for="i in projects" :style="{'background-image': `url(${i.image})`}">
+            <div class="item" :key="i" v-for="i in projects">
                 <h1>{{i.title}}</h1>
-                <p v-if="i.project_url == 'url not available'" :style="{color: 'red', textDecoration: 'none'}">{{i.project_url}}</p>
-                <div class="techstack-wrapper" :key="stack" v-for="stack in i.tech_stack">
+                <img class="project-image" v-bind:src=i.image alt="">
+                <div id="techstack-wrapper">
+                    <div class="img-container" :key="stack" v-for="stack in i.tech_stack">
                     <img class="stack-image" v-bind:src=stack alt="">
                 </div>
-                <a v-if="i.project_url !== 'url not available'" class="project-link" target="_blank" v-bind:href="`https://${i.project_url}`">View Live</a>
-                <p>{{i.created_on}}</p>
-            </div>  
+                </div>
+                <p v-if="i.project_url == 'url not available'" :style="{color: 'red', textDecoration: 'none'}">{{i.project_url}}</p>
+                <a v-if="i.project_url !== 'url not available'" :style="{color: '#66ff66', textDecoration: 'none'}" class="project-link" target="_blank" v-bind:href="`https://${i.project_url}`">View Live</a>
+            </div>
     </div>
 </template>
 
 <style scoped>
 #projects-wrapper{
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    min-height: 90vh;
+    height: 100%;
     background-color: #d9d9d9;
     padding-top: 2em;
     font-family: Archivo;
@@ -47,31 +50,49 @@ export default defineComponent({
 h1{
     color: #eeeeee;
     text-transform: capitalize;
+    font-size: 1em;
 }
 .item{
-    width: 300px;
-    margin: auto;
+    width: 380px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 2em;
-    padding: 2em;
     align-items: center;
     flex-direction: column;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 30px;
+    border-radius: 25px;
+    border: solid #212121;
+    display: grid;
+    grid-template-rows: 10% 60% 10% 20%;
+    box-shadow: 8px 8px #32E0C4;
+    background: #212121;
+    overflow: hidden;
 }
 
 .project-image{
-    width: 50%;
+    width: 100%;
 }
 .project-link{
     margin: 1%;
 }
-.techstack-wrapper{
+#techstack-wrapper{
     display: flex;
     flex-direction: row;
+    text-align: center;
+    width: 100%;
 }
 .stack-image{
-    width: 50px;  
+    text-align: center;
+    width: 80px; 
+    margin: auto;
+}
+.img-container{
+    width: 100%;
+}
+#date{
+    color: #eeeeee;
 }
 </style>
