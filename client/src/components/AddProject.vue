@@ -26,7 +26,7 @@ export default defineComponent({
         },
         async addProject(){
 
-            if(this.title == '' || this.image == '') return alert('please fill the title and image field')
+            if(this.title == '') return alert('please add a title')
             if(this.url == '') this.url = 'url not available'
 
             await axios.post(`http://localhost:3000/api/addProject`, 

@@ -22,56 +22,83 @@ export default defineComponent({
 </script>
 
 <template>
+<div id="main">
+    <h1 id="main-title">some of my projects</h1>
     <div id="projects-wrapper">
             <div class="item" :key="i" v-for="i in projects">
-                <h1>{{i.title}}</h1>
-                <img class="project-image" v-bind:src=i.image alt="">
+                <div class="band"> 
+                    <div class="btn" :style="{'background': '#FF605C'}"></div>
+                    <div class="btn" :style="{'background': '#FFBD44'}"></div>
+                    <div class="btn" :style="{'background': '#00CA4E'}"></div>
+                </div>
+                <div class="image-wrapper">
+                    <img v-bind:src=i.image alt="" class="project-image">
+                </div>
+                <h1 class="card-title">{{i.title}}</h1>
                 <div id="techstack-wrapper">
                     <div class="img-container" :key="stack" v-for="stack in i.tech_stack">
-                    <img class="stack-image" v-bind:src=stack alt="">
+                        <img class="stack-image" v-bind:src=stack alt="">
+                    </div>
                 </div>
+                <div class="link_wrapper">
+                    <a  v-if="i.project_url == 'url not available'" :style="{color: '#FF605C', textDecoration: 'none'}">{{i.project_url}}</a>
+                    <a  v-if="i.project_url !== 'url not available'" :style="{color: '#66ff66', textDecoration: 'none'}" class="project-link" target="_blank" v-bind:href="`https://${i.project_url}`">View Live</a>
                 </div>
-                <p v-if="i.project_url == 'url not available'" :style="{color: 'red', textDecoration: 'none'}">{{i.project_url}}</p>
-                <a v-if="i.project_url !== 'url not available'" :style="{color: '#66ff66', textDecoration: 'none'}" class="project-link" target="_blank" v-bind:href="`https://${i.project_url}`">View Live</a>
             </div>
     </div>
+</div>
+    
 </template>
 
 <style scoped>
+#main{
+    background: #212121;
+    color: #0D7377;
+    text-align: center;
+}
+#main-title{
+    font-size: 2.5em;
+    color: #0D7377;
+    font-family: Archivo;
+    display: flex;
+    justify-content: center;
+}
+
 #projects-wrapper{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     height: 100%;
-    background-color: #d9d9d9;
+    background: #212121;
     padding-top: 2em;
-    font-family: Archivo;
+    font-family: Kanit;
 }
 h1{
     color: #eeeeee;
     text-transform: capitalize;
-    font-size: 1em;
+    font-size: 1.8em;
+    margin: auto;
+    display: flex;
+    justify-content: center;
 }
 .item{
-    width: 380px;
-    height: 500px;
+    width: 400px;
+    height: 300px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2em;
-    align-items: center;
     flex-direction: column;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 25px;
-    border: solid #212121;
-    display: grid;
-    grid-template-rows: 10% 60% 10% 20%;
-    box-shadow: 8px 8px #32E0C4;
-    background: #212121;
-    overflow: hidden;
+    border: solid #eeeeee 1px;
+    background-color: #1a1a1a;
+    border-radius: 5px;
 }
-
+.image-wrapper{
+   overflow: hidden;
+   height: 40%;
+}
 .project-image{
     width: 100%;
 }
@@ -83,10 +110,15 @@ h1{
     flex-direction: row;
     text-align: center;
     width: 100%;
+    margin: auto;
+}
+.card-title{
+    margin-bottom: 5%;
 }
 .stack-image{
     text-align: center;
-    width: 80px; 
+    width: 40px;
+    height: 40px; 
     margin: auto;
 }
 .img-container{
@@ -94,5 +126,34 @@ h1{
 }
 #date{
     color: #eeeeee;
+}
+a{
+    font-weight: 900;
+    margin: auto;
+    border: solid rgba(195, 195, 195, 0.5) 2px ;
+    width: 50%;
+    padding: 2%;
+    display: block;
+    border-radius: 100px;
+}
+a:hover{
+    background: rgba(50, 224, 196, 0.7);
+    transition: 0.3s;
+}
+.band{
+    background: rgba(195, 195, 195, 0.5);
+    width: 100%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.btn{
+    height: 9px;
+    width: 9px;
+    margin-bottom: auto;
+    margin-top: auto;
+    margin: 1.5%;
+    border-radius: 100px;
 }
 </style>
