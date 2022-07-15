@@ -46,6 +46,9 @@ export default defineComponent({
                 </div>
             </div>
     </div>
+    <div id="contact">
+        <p>Contact me<br>paperdev@agencepapercode.com</p>
+    </div>
 </div>
     
 </template>
@@ -55,7 +58,9 @@ export default defineComponent({
     background: #212121;
     color: #0D7377;
     text-align: center;
+    height: 100%;
 }
+
 #main-title{
     font-size: 2.5em;
     color: #0D7377;
@@ -75,8 +80,8 @@ export default defineComponent({
 }
 h1{
     color: #eeeeee;
-    text-transform: capitalize;
-    font-size: 1.8em;
+    text-transform: uppercase;
+    font-size: 1.4em;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -117,7 +122,6 @@ h1{
 }
 .stack-image{
     text-align: center;
-    width: 40px;
     height: 40px; 
     margin: auto;
 }
@@ -140,13 +144,18 @@ a:hover{
     background: rgba(50, 224, 196, 0.7);
     transition: 0.3s;
 }
+.link_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .band{
     background: rgba(195, 195, 195, 0.5);
     width: 100%;
     height: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .btn{
     height: 9px;
@@ -155,5 +164,54 @@ a:hover{
     margin-top: auto;
     margin: 1.5%;
     border-radius: 100px;
+}
+
+#contact{
+    display: none;
+    font-size: 1em;
+    padding: auto;
+    padding-top: 9em;
+    padding-bottom: 2%;
+    color: #ffffff;
+}
+#contact p{
+    margin: 0;
+}
+
+@media only screen and (max-width: 1300px) {
+    #projects-wrapper{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    #projects-wrapper{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+    .item{
+        width: 350px;
+        height: 300px;
+    }
+    #main-title{
+        font-size: 1.5em;
+    }
+
+    .stack-image{
+        height: 35px; 
+    }
+    #techstack-wrapper{
+        margin-bottom: 4%;
+    }
+
+    #contact{
+        display: block;
+        padding-top: 5em;
+        padding-bottom: 4%;
+        font-size: 1.5em;
+    }
 }
 </style>

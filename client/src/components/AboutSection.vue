@@ -2,7 +2,7 @@
 export default{
     data() {
         return{
-            email: 'ikhayam000@protonmail.com'
+            email: 'paperdev@agencepapercode.com'
         }
     },
     methods: {
@@ -230,5 +230,30 @@ input{
 
 #email-me p{
     color: #ffffff;
+}
+
+@media only screen and (max-width: 850px) {
+    #tech-stack{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    .img-wrapper{
+        margin: auto;
+        margin-top: 1em;
+    }
+
+    #about-wrapper{
+        display: grid;
+        grid-template-columns: 100%;
+        font-family: Archivo;
+    }
+    #title{
+        font-size: 1em;
+    }
+    #navigation{
+        display: none;
+    }
 }
 </style>
