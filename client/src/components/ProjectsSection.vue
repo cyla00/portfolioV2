@@ -23,7 +23,7 @@ export default defineComponent({
 
 <template>
 <div id="main">
-    <h1 id="main-title">some of my projects</h1>
+    <h1 id="main-title">Some Of My Projects</h1>
     <div id="projects-wrapper">
             <div class="item" :key="i" v-for="i in projects">
                 <div class="band"> 
@@ -47,7 +47,7 @@ export default defineComponent({
             </div>
     </div>
     <div id="contact">
-        <p>Contact me<br>paperdev@agencepapercode.com</p>
+        <p>To contact me<br>paperdev@agencepapercode.com</p>
     </div>
 </div>
     
@@ -80,7 +80,6 @@ export default defineComponent({
 }
 h1{
     color: #eeeeee;
-    text-transform: uppercase;
     font-size: 1.4em;
     margin: auto;
     display: flex;
