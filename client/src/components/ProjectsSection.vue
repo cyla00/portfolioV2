@@ -23,7 +23,7 @@ export default defineComponent({
 
 <template>
 <div id="main">
-    <h1 id="main-title">Some Of My Projects</h1>
+    <h1 id="main-title">Some Projects</h1>
     <div id="projects-wrapper">
             <div class="item" :key="i" v-for="i in projects">
                 <div class="band"> 
@@ -46,9 +46,6 @@ export default defineComponent({
                 </div>
             </div>
     </div>
-    <div id="contact">
-        <p>To contact me<br>paperdev@agencepapercode.com</p>
-    </div>
 </div>
     
 </template>
@@ -59,6 +56,7 @@ export default defineComponent({
     color: #0D7377;
     text-align: center;
     height: 100%;
+    padding-bottom: 20vh;
 }
 
 #main-title{
@@ -67,6 +65,7 @@ export default defineComponent({
     font-family: Archivo;
     display: flex;
     justify-content: center;
+    padding-bottom: 3%;
 }
 
 #projects-wrapper{
@@ -165,18 +164,6 @@ a:hover{
     border-radius: 100px;
 }
 
-#contact{
-    display: none;
-    font-size: 1em;
-    padding: auto;
-    padding-top: 9em;
-    padding-bottom: 2%;
-    color: #ffffff;
-}
-#contact p{
-    margin: 0;
-}
-
 @media only screen and (max-width: 1300px) {
     #projects-wrapper{
         display: grid;
@@ -204,13 +191,6 @@ a:hover{
     }
     #techstack-wrapper{
         margin-bottom: 4%;
-    }
-
-    #contact{
-        display: block;
-        padding-top: 5em;
-        padding-bottom: 4%;
-        font-size: 1.5em;
     }
 }
 </style>

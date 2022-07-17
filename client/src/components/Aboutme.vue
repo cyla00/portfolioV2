@@ -4,8 +4,6 @@
 
 <template>
     <div id="about-wrapper">
-        <h1 id="title">What I Mostly Work On</h1>
-
         <div class="dev-wrapper">
             <div class="text-wrapper">
                 <h1>E-commerce &amp; Landing Websites</h1>
@@ -18,7 +16,7 @@
         </div>
 
         <div class="dev-wrapper">
-            <div class="image-wrapper">
+            <div class="image-wrapper" id="image-order-apps">
                 <img src="https://i.ibb.co/xjrbGCb/clo.png" alt="">
             </div>
             <div class="text-wrapper">
@@ -52,12 +50,6 @@
     background: #212121;
     font-family: Archivo;
 }
-#title{
-    color: #0D7377;
-    font-size: 3em;
-    padding-bottom: 10%;
-    text-align: center;
-}
 .dev-wrapper{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -69,7 +61,7 @@
 .text-wrapper{
     text-align: start;
     padding-left: 20%;
-    padding-right: 20%;
+    padding-right: 10%;
     position: relative;
     top: 40%;
 }
@@ -86,4 +78,36 @@
     color: #ff3377;
 }
 
+
+@media only screen and (max-width: 1100px) {
+   .text-wrapper h1{
+        font-size: 1.8em;
+    }
+    .text-wrapper p{
+        font-size: 1em;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+   .dev-wrapper{
+        display: grid;
+        grid-template-rows: 40% 60%;
+        grid-template-columns: none;
+        padding-bottom: 30%;
+    }
+    .text-wrapper{
+        text-align: center;
+        position: inherit;
+        padding: 1%;
+    }
+    .text-wrapper h1{
+        font-size: 1.5em;
+    }
+    .text-wrapper p{
+        font-size: 1em;
+    }
+    #image-order-apps{
+        order: 1;
+    }
+}
 </style>
