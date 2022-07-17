@@ -29,16 +29,10 @@ export default{
 <template>
     
     <div id="about-wrapper">
-        <div id="navigation"> 
-            <button id="btn1" class="about-button" @click="btn1()"></button>
-            <button id="btn2" class="about-button" @click="btn2()"></button>
-        </div>
 
         <div id="title">
             <h1>Hello! my name is Ismail<br><span class="custom-title">full-stack web developer</span></h1>
             <p>Here some of the technologies i use</p>
-            
-
             <div id="tech-stack">
                 <div class="img-wrapper">
                     <img src="https://i.ibb.co/BK1T9FM/dj.png" alt="">
@@ -73,47 +67,17 @@ export default{
                 </div>
             </div>
         </div>
-
-        <div id="form-wrapper">
-
-            <h1 id="form-title">let's <span class="custom-title">work</span> together<br>or get in touch</h1>
-            
-            <div class="form-fields">
-                <input type="text" name="first-name" id="" placeholder="First Name">
-                <input type="text" name="last-name" id="" placeholder="Last Name">
-            </div>
-
-
-            <div class="form-fields">
-                <input type="text" name="email" id="" placeholder="E-Mail">
-                <input type="text" name="number" id="" placeholder="Number">
-            </div>
-
-            <div class="form-fields">
-                <input type="text" name="message" id="msg" placeholder="Message">
-            </div>
-
-            <div id="contact-btn">
-                <button>Submit</button>
-            </div>
-            
-
-            <div id="email-me">
-                <p>E-Mail me!<br>{{email}}</p>
-            </div>
-        </div>
-        
     </div>
     
 </template>
 
 <style scoped>
 #about-wrapper{
-    display: grid;
-    grid-template-columns: 5% 1fr;
+    display: flex;
     font-family: Archivo;
     background: #212121;
     min-height: 100vh;
+    margin: auto;
 }
 #navigation{
     margin: auto;
@@ -172,66 +136,6 @@ img{
     width: 100px;
 }
 
-#form-wrapper{
-    display: none;
-    margin: auto;
-    width: 70%;
-    font-size: 1.5em;
-}
-#form-wrapper h1{
-    margin-bottom: 2em;
-}
-
-#form-title{
-    color: #0D7377;
-}
-
-input{
-    color: #eeeeee;
-    background: none;
-    border: none;
-    border-bottom: solid #eeeeee 3px;
-    margin: 2%;
-    margin-bottom: 2em !important;
-    width: 100%;
-}
-
-.form-fields{
-    display: flex;
-    width: 80%;
-    margin: auto;
-}
-
-#msg{
-    width: 100%;
-    margin-top: 3em;
-}
-
-#contact-btn{
-    text-align: center;
-    margin: auto;
-}
-#contact-btn button{
-    background: #eeeeee;
-    font-family: 'Open Sans';
-    border: none;
-}
-#contact-btn button:active{
-    background: #ffffff;
-}
-
-#email-me{
-    text-align: left;
-    font-size: 0.6em;
-    margin: auto;
-    margin-top: 10em;
-    color: #ffffff;
-}
-
-#email-me p{
-    color: #ffffff;
-}
-
 @media only screen and (max-width: 850px) {
     #tech-stack{
         display: grid;
@@ -252,9 +156,6 @@ input{
     }
     #title{
         font-size: 1em;
-    }
-    #navigation{
-        display: none;
     }
 }
 </style>
