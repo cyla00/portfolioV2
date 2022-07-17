@@ -1,15 +1,17 @@
 <script lang="ts">
-export default{
+import { defineComponent } from "vue"
+
+export default defineComponent({
     data(){
         return{
-            year: ''
+            year: '',
         }
     },
     mounted(){
         const d = new Date()
-        this.year = d.getFullYear()
+        this.year = d.getFullYear().toString()
     }
-}
+})
 </script>
 
 <template>
@@ -44,5 +46,12 @@ p{
 img{
     width: 2em;
     margin: 0.5%;
+}
+
+@media only screen and (max-width: 850px) {
+    img{
+        width: 3em;
+        margin: 2%;
+    }
 }
 </style>
