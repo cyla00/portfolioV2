@@ -1,5 +1,7 @@
 <script lang="ts">
-
+export default{
+    name: 'Aboutme',
+}
 </script>
 
 <template>

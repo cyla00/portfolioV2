@@ -2,6 +2,7 @@
 import AboutSection from '../components/AboutSection.vue'
 import ProjectsSection from '../components/ProjectsSection.vue'
 import Aboutme from '../components/Aboutme.vue'
+import Footer from '../components/Footer.vue'
 
 export default {
   name: 'app',
@@ -9,6 +10,7 @@ export default {
     AboutSection,
     ProjectsSection,
     Aboutme,
+    Footer,
   }
 };
 </script>
@@ -19,6 +21,7 @@ export default {
     <AboutSection/>
     <Aboutme/>
     <ProjectsSection/>
+    <Footer/>
   </div>
 </template>
 

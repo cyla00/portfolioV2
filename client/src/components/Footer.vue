@@ -2,6 +2,7 @@
 import { defineComponent } from "vue"
 
 export default defineComponent({
+    name: 'Footer',
     data(){
         return{
             year: '',
@@ -16,13 +17,13 @@ export default defineComponent({
 
 <template>
     <footer>
-        <Div id="content">
+        <div id="content">
             <div id="socials">
                 <a href="https://www.github.com/cyla00" target="_blank"><img src="https://i.ibb.co/JvdWZmZ/g.png" alt=""></a>
                 <p>paperdev@agencepapercode.com</p>
             </div>
             
-        </Div>
+        </div>
         <p>&copy; {{year}} ikportfolio.cyou</p>
     </footer>
 </template>

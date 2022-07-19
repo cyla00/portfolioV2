@@ -3,6 +3,7 @@ import { defineComponent } from "vue"
 import axios from 'axios'
 
 export default defineComponent({
+    name: 'ProjectsSection',
     data() {
         return{
             projects: [],
@@ -10,7 +11,7 @@ export default defineComponent({
     },
     methods: {
         async fetchProjects(){
-            await axios.get('http://localhost:3000/api/projects').then((data) => {
+            await axios.get('/api/projects').then((data) => {
                 this.projects = data.data
             })
         }

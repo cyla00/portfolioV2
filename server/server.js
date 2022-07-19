@@ -141,7 +141,7 @@ app.post('/api/removeProject', (req, res) => {
     res.sendStatus(200);
 });
 if (process.env.PR_STATUS === 'production') {
-    app.use(express.static(__dirname + '../dist'));
+    app.use(express.static(__dirname + '/dist'));
     app.get(/.*/, (req, res) => {
         res.sendFile(__dirname + '/dist/index.html');
     });

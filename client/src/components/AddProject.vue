@@ -3,6 +3,7 @@ import { defineComponent } from 'vue'
 import axios from 'axios'
 
 export default defineComponent({
+    name: 'AddProject',
     data(){
         return{
             tech: [] as string[],
@@ -29,7 +30,7 @@ export default defineComponent({
             if(this.title == '') return alert('please add a title')
             if(this.url == '') this.url = 'url not available'
 
-            await axios.post(`http://localhost:3000/api/addProject`, 
+            await axios.post(`/api/addProject`, 
             {title: this.title, image: this.image, url: this.url, tech: this.tech, idcheck: localStorage.getItem('id')})
             .then((res :any) => {
                 if(res.status !== 200) {
