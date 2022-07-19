@@ -47,7 +47,7 @@ export default defineComponent({
             </div>
     </div>
     <div id="contact">
-        <p>Contact me<br>paperdev@agencepapercode.com</p>
+        <p>Let's work together<br>paperdev@agencepapercode.com</p>
     </div>
 </div>
     
