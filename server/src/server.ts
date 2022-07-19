@@ -152,9 +152,9 @@ app.post('/api/removeProject', (req:any, res:any) :void => {
 })
 
 if(process.env.PR_STATUS === 'production'){
-    app.use(express.static(__dirname + '/public'))
+    app.use(express.static(__dirname + '/dist'))
     app.get(/.*/, (req:any, res:any) => {
-        res.sendFile(__dirname + '/public/index.html')
+        res.sendFile(__dirname + '/dist/index.html')
     })
 }
 
