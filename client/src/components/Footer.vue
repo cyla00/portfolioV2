@@ -20,7 +20,7 @@ export default defineComponent({
         <div id="content">
             <div id="socials">
                 <a href="https://www.github.com/cyla00" target="_blank"><img src="https://i.ibb.co/JvdWZmZ/g.png" alt=""></a>
-                <p>paperdev@agencepapercode.com</p>
+                <p>developer@ikportfolio.cyou</p>
             </div>
             
         </div>
