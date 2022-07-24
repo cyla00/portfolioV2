@@ -261,8 +261,8 @@ export default{
     grid-template-columns: 1fr 1fr;
     padding-bottom: 10%;
 }
-.dev-wrapper img{
-    width: 60%;
+.dev-wrapper svg{
+    width: 80%;
 }
 .text-wrapper{
     text-align: start;
@@ -299,7 +299,7 @@ export default{
         display: grid;
         grid-template-rows: 20% 80%;
         grid-template-columns: none;
-        padding-bottom: 20%;
+        padding-bottom: 10%;
     }
     .text-wrapper{
         text-align: center;
@@ -315,12 +315,10 @@ export default{
     #image-order-apps{
         order: 1;
     }
+
 }
 
 
-svg{
-    width: 70%;
-}
 
 #Items{
     animation: fade 5s ease forwards infinite;
